@@ -355,8 +355,11 @@ function calculateBalance(arr) {
  *    createChunks(['a', 'b', 'c', 'd', 'e'], 2) => [['a', 'b'], ['c', 'd'], ['e']]
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
-function createChunks(/* arr, chunkSize */) {
-  throw new Error('Not implemented');
+function createChunks(arr, chunkSize) {
+  const numberOfChunks = Math.ceil(arr.length / chunkSize);
+  return new Array(numberOfChunks).fill(0).map((_, idx) => {
+    return arr.slice(idx * chunkSize, idx * chunkSize + chunkSize);
+  });
 }
 
 /**
@@ -371,8 +374,16 @@ function createChunks(/* arr, chunkSize */) {
  *    generateOdds(2) => [ 1, 3 ]
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
-function generateOdds(/* len */) {
-  throw new Error('Not implemented');
+function generateOdds(len) {
+  let count = 0;
+  const res = new Array(len).fill(1);
+  return res.map((item, idx) => {
+    if (idx > 0) {
+      count += 2;
+      return item + count;
+    }
+    return 1;
+  });
 }
 
 /**
@@ -387,8 +398,8 @@ function generateOdds(/* len */) {
  *   getElementByIndices(['one','two','three'], [2]) => 'three'  (arr[2])
  *   getElementByIndices([[[ 1, 2, 3]]], [ 0, 0, 1 ]) => 2        (arr[0][0][1])
  */
-function getElementByIndices(/* arr, indices */) {
-  throw new Error('Not implemented');
+function getElementByIndices(arr, indices) {
+  return indices.reduce((res, idx) => res[idx], arr);
 }
 
 /**
@@ -432,8 +443,18 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  let count = 0;
+  const arr = new Array(n).fill(new Array(n).fill(0));
+  return arr.map((item, i) =>
+    item.map((_x, y) => {
+      if (i === count && y === count) {
+        count += 1;
+        return 1;
+      }
+      return 0;
+    })
+  );
 }
 
 /**
