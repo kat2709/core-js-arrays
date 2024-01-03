@@ -447,12 +447,12 @@ function getIdentityMatrix(n) {
   let count = 0;
   const arr = new Array(n).fill(new Array(n).fill(0));
   return arr.map((item, i) =>
-    item.map((_x, y) => {
+    item.map((x, y) => {
       if (i === count && y === count) {
         count += 1;
         return 1;
       }
-      return 0;
+      return x;
     })
   );
 }
